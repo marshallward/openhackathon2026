@@ -8,6 +8,12 @@ Ocean's 4: MOM6 on GPUs
 .. Five slides max, this is a 3 minute presentation
 
 
+Team Members
+============
+
+TODO
+
+
 MOM6 Ocean Model
 ================
 
@@ -43,6 +49,12 @@ Dynamic Core
 .. image:: img/dycore_tree.svg
 
 
+Dycore progress
+---------------
+
+.. image:: image/genoa_vs_h100.svg
+
+
 Remaining Work
 ==============
 
@@ -50,7 +62,13 @@ Remaining Work
 
 .. image:: img/mom6code.svg
 
-Proposals
-=========
+Proposal: ePBL
+==============
+
+A parameterization of the ocean mixed layer
+
+TODO: Figure?
+
+TODO: Code structure
 
 
