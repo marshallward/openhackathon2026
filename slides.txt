@@ -8,10 +8,35 @@ Ocean's 4: MOM6 on GPUs
 .. Five slides max, this is a 3 minute presentation
 
 
-Team Members
-============
+The Team
+========
 
-TODO
+.. list-table::
+   :widths: 50 50
+
+   * - .. image:: img/ed.png
+          :height: 140
+
+       | Ed Yang
+       | (ACCESS-NRI)
+
+       .. image:: img/utheri.jpg
+          :height: 140
+
+       | Utheri Wagura
+       | (NOAA-GFDL)
+
+     - .. image:: img/jorge.png
+          :height: 140
+
+       | Jorge Galvez Vallejo
+       | (NCI Australia)
+
+       .. image:: img/marshall.png
+          :height: 140
+
+       | Marshall Ward
+       | (NOAA-GFDL)
 
 
 MOM6 Ocean Model
@@ -32,8 +57,8 @@ Requirements
 
 Our strategy:
 
-* ``do concurrent`` where possible
-* ``!$omp target`` where necessary
+* Fortran intrinsics where possible (``do concurrent``)
+* OpenMP directives where necessary
 * **Manual** memory management
 
 

@@ -63,9 +63,30 @@
   </aside>
 </section>
 
-<section id="team-members" class="title-slide slide level1">
-<h1>Team Members</h1>
-<p>TODO</p>
+<section id="the-team" class="title-slide slide level1">
+<h1>The Team</h1>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr>
+<td><p><img data-src="img/ed.png" height="140" alt="image" /></p>
+<div class="line-block">Ed Yang<br />
+(ACCESS-NRI)</div>
+<p><img data-src="img/utheri.jpg" height="140" alt="image" /></p>
+<div class="line-block">Utheri Wagura<br />
+(NOAA-GFDL)</div></td>
+<td><p><img data-src="img/jorge.png" height="140" alt="image" /></p>
+<div class="line-block">Jorge Galvez Vallejo<br />
+(NCI Australia)</div>
+<p><img data-src="img/marshall.png" height="140" alt="image" /></p>
+<div class="line-block">Marshall Ward<br />
+(NOAA-GFDL)</div></td>
+</tr>
+</tbody>
+</table>
 </section>
 
 <section id="mom6-ocean-model" class="title-slide slide level1">
@@ -86,8 +107,8 @@ href="media/mom6_relvort.mp4">media/mom6_relvort.mp4</a></video>
 </ul>
 <p>Our strategy:</p>
 <ul>
-<li><code>do concurrent</code> where possible</li>
-<li><code>!$omp target</code> where necessary</li>
+<li>Fortran intrinsics where possible (<code>do concurrent</code>)</li>
+<li>OpenMP directives where necessary</li>
 <li><strong>Manual</strong> memory management</li>
 </ul>
 </section>
