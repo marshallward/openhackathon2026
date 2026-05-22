@@ -37,6 +37,12 @@ GPU Progress
 .. image:: img/genoa_vs_h100_dycore.svg
 
 
+Dynamic Core
+------------
+
+.. image:: img/dycore_tree.svg
+
+
 Remaining Work
 ==============
 
