@@ -1,0 +1,40 @@
+style.fill: transparent
+
+step_mom: {}
+
+step_mom -> step_mom_dynamics
+step_mom -> step_mom_thermo
+step_mom -> ale_regridding_and_remapping
+step_mom -> step_mom_tracer_dyn
+
+# Dycore
+
+step_mom_dynamics: {}
+
+step_mom_dynamics -> step_mom_dyn_split_RK2
+step_mom_dynamics -> calc_slope_functions
+step_mom_dynamics -> thickness_diffuse
+step_mom_dynamics -> set_viscous_BBL
+step_mom_dynamics -> mixedlayer_restrat
+
+step_mom_dyn_split_RK2: {}
+
+#step_mom_dyn_split_RK2 -> continuity_PPM
+#step_mom_dyn_split_RK2 -> pressureforce_FV_Bouss
+#step_mom_dyn_split_RK2 -> btstep
+#step_mom_dyn_split_RK2 -> vertvisc_coef
+#step_mom_dyn_split_RK2 -> horizontal_viscosity
+#step_mom_dyn_split_RK2 -> vertvisc_remnant
+#step_mom_dyn_split_RK2 -> vertvisc
+#step_mom_dyn_split_RK2 -> CorAdCalc
+#step_mom_dyn_split_RK2 -> btcalc
+
+calc_slope_functions -> calc_isoneutral_slopes
+calc_slope_functions -> valc_visbeck_coeffs_old
+
+# Thermo
+
+step_mom_thermo -> diabatic
+diabatic -> energetic_PBL
+diabatic -> set_diffusivity
+diabatic -> applyboundaryfluxesinout

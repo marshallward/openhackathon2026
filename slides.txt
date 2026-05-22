@@ -1,0 +1,50 @@
+=======================
+Ocean's 4: MOM6 on GPUs
+=======================
+
+:description: Introductory slides for Princeton Open Hackathon 2026
+:date: 2026-06-02
+
+.. Five slides max, this is a 3 minute presentation
+
+
+MOM6 Ocean Model
+================
+
+.. figure:: media/mom6_relvort.mp4
+   :target: https://dx.doi.org/10.1029/2019MS001726
+
+A mission-critical model that doesn't run on GPUs.
+
+
+Requirements
+============
+
+* Preserve the Fortran codebase
+* Retain CPU performance
+* Ensure **bit reproducibility**
+
+Our strategy:
+
+* ``do concurrent`` where possible
+* ``!$omp target`` where necessary
+* **Manual** memory management
+
+
+GPU Progress
+============
+
+.. image:: img/genoa_vs_h100_dycore.svg
+
+
+Remaining Work
+==============
+
+.. Flow chart of general model structure and remaining components
+
+.. image:: img/mom6code.svg
+
+Proposals
+=========
+
+
