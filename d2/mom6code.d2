@@ -28,7 +28,7 @@ step_mom_dynamics: {
     style.fill: lightcoral
 }
 
-step_mom_dynamics -> step_mom_dyn_split_RK2 {
+step_mom_dynamics -> dycore.step_mom_dyn_split_RK2 {
     style.stroke: white
 }
 step_mom_dynamics -> calc_slope_functions {
@@ -47,19 +47,18 @@ step_mom_dynamics -> mixedlayer_restrat {
 
 # Dycore
 
-step_mom_dyn_split_RK2: {
-    label: Dycore
-    style.fill: lightgreen
+dycore: {
+  label: ""
+  style.fill: transparent
+  style.stroke: lightgreen
+  style.stroke-width: 3
+  style.border-radius: 999
+
+  step_mom_dyn_split_RK2: {
+      label: Dycore
+      style.fill: lightgreen
+  }
 }
-
-# testing
-step_mom_dyn_split_RK2 -> P
-step_mom_dyn_split_RK2 -> cont
-step_mom_dyn_split_RK2 -> btstep
-step_mom_dyn_split_RK2 -> horvisc
-
-
-
 
 
 # Lateral mixing coefficients
@@ -106,7 +105,7 @@ step_mom_thermo: {
 step_mom_thermo -> diabatic {
     style.stroke: white
 }
-diabatic -> energetic_pbl {
+diabatic -> epbl.energetic_pbl {
     style.stroke: white
 }
 diabatic -> set_diffusivity {
@@ -119,9 +118,17 @@ diabatic: {
     style.fill: lightcoral
 }
 
-energetic_pbl: {
-    label: ePBL
-    style.fill: lightcoral
+epbl: {
+  label: ""
+  style.fill: transparent
+  style.stroke: lightcoral
+  style.stroke-width: 3
+  style.border-radius: 999
+
+  energetic_pbl: {
+      label: ePBL
+      style.fill: lightcoral
+  }
 }
 
 set_diffusivity: {
