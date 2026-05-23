@@ -1,5 +1,5 @@
-import { HORIZONTAL_SLIDES_SELECTOR } from '../utils/constants.js'
-import { queryAll } from '../utils/util.js'
+import { HORIZONTAL_SLIDES_SELECTOR, HORIZONTAL_BACKGROUNDS_SELECTOR } from '../utils/constants'
+import { queryAll } from '../utils/util'
 
 const HIDE_SCROLLBAR_TIMEOUT = 500;
 const MAX_PROGRESS_SPACING = 4;
@@ -17,6 +17,8 @@ export default class ScrollView {
 		this.Reveal = Reveal;
 
 		this.active = false;
+		this.activeProgressBarPage = null;
+		this.activeProgressBarTrigger = null;
 		this.activatedCallbacks = [];
 
 		this.onScroll = this.onScroll.bind( this );
@@ -40,6 +42,7 @@ export default class ScrollView {
 		this.slideHTMLBeforeActivation = this.Reveal.getSlidesElement().innerHTML;
 
 		const horizontalSlides = queryAll( this.Reveal.getRevealElement(), HORIZONTAL_SLIDES_SELECTOR );
+		const horizontalBackgrounds = queryAll( this.Reveal.getRevealElement(), HORIZONTAL_BACKGROUNDS_SELECTOR );
 
 		this.viewportElement.classList.add( 'loading-scroll-mode', 'reveal-scroll' );
 
@@ -57,7 +60,7 @@ export default class ScrollView {
 
 		// Creates a new page element and appends the given slide/bg
 		// to it.
-		const createPageElement = ( slide, h, v ) => {
+		const createPageElement = ( slide, h, v, isVertical ) => {
 
 			let contentContainer;
 
@@ -76,8 +79,20 @@ export default class ScrollView {
 				page.className = 'scroll-page';
 				pageElements.push( page );
 
-				// Copy the presentation-wide background to each page
-				if( presentationBackground ) {
+				// This transfers over the background of the vertical stack containing
+				// the slide if it exists. Otherwise, it uses the presentation-wide
+				// background.
+				if( isVertical && horizontalBackgrounds.length > h ) {
+					const slideBackground = horizontalBackgrounds[h];
+					const pageBackground = window.getComputedStyle( slideBackground );
+
+					if( pageBackground && pageBackground.background ) {
+						page.style.background = pageBackground.background;
+					}
+					else if( presentationBackground ) {
+						page.style.background = presentationBackground;
+					}
+				} else if( presentationBackground ) {
 					page.style.background = presentationBackground;
 				}
 
@@ -110,7 +125,7 @@ export default class ScrollView {
 
 			if( this.Reveal.isVerticalStack( horizontalSlide ) ) {
 				horizontalSlide.querySelectorAll( 'section' ).forEach( ( verticalSlide, v ) => {
-					createPageElement( verticalSlide, h, v );
+					createPageElement( verticalSlide, h, v, true );
 				});
 			}
 			else {
@@ -157,6 +172,11 @@ export default class ScrollView {
 
 		this.viewportElement.removeEventListener( 'scroll', this.onScroll );
 		this.viewportElement.classList.remove( 'reveal-scroll' );
+
+		if( this.pendingScrollRaf ) {
+			cancelAnimationFrame( this.pendingScrollRaf );
+			this.pendingScrollRaf = 0;
+		}
 
 		this.removeProgressBar();
 
@@ -249,6 +269,9 @@ export default class ScrollView {
 			this.progressBar = null;
 		}
 
+		this.activeProgressBarPage = null;
+		this.activeProgressBarTrigger = null;
+
 	}
 
 	layout() {
@@ -277,7 +300,7 @@ export default class ScrollView {
 		const pageHeight = useCompactLayout ? compactHeight : viewportHeight;
 
 		// The height that needs to be scrolled between scroll triggers
-		const scrollTriggerHeight = useCompactLayout ? compactHeight : viewportHeight;
+		this.scrollTriggerHeight = useCompactLayout ? compactHeight : viewportHeight;
 
 		this.viewportElement.style.setProperty( '--page-height', pageHeight + 'px' );
 		this.viewportElement.style.scrollSnapType = typeof config.scrollSnap === 'string' ? `y ${config.scrollSnap}` : '';
@@ -333,12 +356,12 @@ export default class ScrollView {
 			for( let i = 0; i < totalScrollTriggerCount + 1; i++ ) {
 				const triggerStick = document.createElement( 'div' );
 				triggerStick.className = 'scroll-snap-point';
-				triggerStick.style.height = scrollTriggerHeight + 'px';
+				triggerStick.style.height = this.scrollTriggerHeight + 'px';
 				triggerStick.style.scrollSnapAlign = useCompactLayout ? 'center' : 'start';
 				page.pageElement.appendChild( triggerStick );
 
 				if( i === 0 ) {
-					triggerStick.style.marginTop = -scrollTriggerHeight + 'px';
+					triggerStick.style.marginTop = -this.scrollTriggerHeight + 'px';
 				}
 			}
 
@@ -355,7 +378,7 @@ export default class ScrollView {
 			}
 
 			// Add scroll padding based on how many scroll triggers we have
-			page.scrollPadding = scrollTriggerHeight * totalScrollTriggerCount;
+			page.scrollPadding = this.scrollTriggerHeight * totalScrollTriggerCount;
 
 			// The total height including scrollable space
 			page.totalHeight = page.pageHeight + page.scrollPadding;
@@ -425,7 +448,6 @@ export default class ScrollView {
 			];
 
 			const scrollTriggerSegmentSize = ( trigger.range[1] - trigger.range[0] ) / trigger.page.scrollTriggers.length;
-
 			// Set the range for each inner scroll trigger
 			trigger.page.scrollTriggers.forEach( ( scrollTrigger, i ) => {
 				scrollTrigger.range = [
@@ -436,6 +458,10 @@ export default class ScrollView {
 
 			rangeStart = trigger.range[1];
 		} );
+
+		// Ensure the last trigger extends to the end of the page, otherwise
+		// rounding errors can cause the last trigger to end at 0.999999...
+		this.slideTriggers[this.slideTriggers.length - 1].range[1] = 1;
 
 	}
 
@@ -462,16 +488,17 @@ export default class ScrollView {
 					activate: () => {
 						this.Reveal.fragments.update( -1, page.fragments, slideElement );
 					}
-				},
-
-				// Triggers for each fragment group
-				...fragmentGroups.map( ( fragments, i ) => ({
-						activate: () => {
-							this.Reveal.fragments.update( i, page.fragments, slideElement );
-						}
-					})
-				)
+				}
 			);
+
+			// Triggers for each fragment group
+			fragmentGroups.forEach( ( fragments, i ) => {
+				page.scrollTriggers.push({
+					activate: () => {
+						this.Reveal.fragments.update( i, page.fragments, slideElement );
+					}
+				});
+			} );
 		}
 
 
@@ -534,6 +561,13 @@ export default class ScrollView {
 	syncProgressBar() {
 
 		this.progressBarInner.querySelectorAll( '.scrollbar-slide' ).forEach( slide => slide.remove() );
+		this.activeProgressBarPage = null;
+		this.activeProgressBarTrigger = null;
+
+		this.getAllPages().forEach( page => {
+			page.progressBarSlide = null;
+			page.scrollTriggers.forEach( trigger => trigger.progressBarElement = null );
+		} );
 
 		const scrollHeight = this.viewportElement.scrollHeight;
 		const viewportHeight = this.viewportElement.offsetHeight;
@@ -564,7 +598,7 @@ export default class ScrollView {
 				this.progressBarInner.appendChild( page.progressBarSlide );
 
 				// Visual representations of each scroll trigger
-				page.scrollTriggerElements = page.scrollTriggers.map( ( trigger, i ) => {
+				page.scrollTriggers.forEach( ( trigger, i ) => {
 
 					const triggerElement = document.createElement( 'div' );
 					triggerElement.className = 'scrollbar-trigger';
@@ -574,16 +608,11 @@ export default class ScrollView {
 
 					if( i === 0 ) triggerElement.style.display = 'none';
 
-					return triggerElement;
+					trigger.progressBarElement = triggerElement;
 
 				} );
 
 			} );
-
-		}
-		else {
-
-			this.pages.forEach( page => page.progressBarSlide = null );
 
 		}
 
@@ -604,6 +633,7 @@ export default class ScrollView {
 		const scrollProgressMid = Math.max( Math.min( ( scrollTop + viewportHeight / 2 ) / this.viewportElement.scrollHeight, 1 ), 0 );
 
 		let activePage;
+		let activeScrollTrigger = null;
 
 		this.slideTriggers.forEach( ( trigger ) => {
 			const { page } = trigger;
@@ -616,7 +646,7 @@ export default class ScrollView {
 				page.loaded = true;
 				this.Reveal.slideContent.load( page.slideElement );
 			}
-			else if( page.loaded ) {
+			else if( !shouldPreload && page.loaded ) {
 				page.loaded = false;
 				this.Reveal.slideContent.unload( page.slideElement );
 			}
@@ -638,6 +668,7 @@ export default class ScrollView {
 			activePage.scrollTriggers.forEach( ( trigger ) => {
 				if( scrollProgressMid >= trigger.range[0] && scrollProgressMid <= trigger.range[1] ) {
 					this.activateTrigger( trigger );
+					activeScrollTrigger = trigger;
 				}
 				else if( trigger.active ) {
 					this.deactivateTrigger( trigger );
@@ -646,7 +677,11 @@ export default class ScrollView {
 		}
 
 		// Update our visual progress indication
-		this.setProgressBarValue( scrollTop / ( this.viewportElement.scrollHeight - viewportHeight ) );
+		this.setProgressBarValue(
+			scrollTop / ( this.viewportElement.scrollHeight - viewportHeight ),
+			activePage,
+			activeScrollTrigger
+		);
 
 	}
 
@@ -654,22 +689,26 @@ export default class ScrollView {
 	 * Moves the progress bar playhead to the specified position.
 	 *
 	 * @param {number} progress 0-1
+	 * @param {object} activePage
+	 * @param {object} activeScrollTrigger
 	 */
-	setProgressBarValue( progress ) {
+	setProgressBarValue( progress, activePage = null, activeScrollTrigger = null ) {
 
 		if( this.progressBar ) {
 
 			this.progressBarPlayhead.style.transform = `translateY(${progress * this.progressBarScrollableHeight}px)`;
 
-			this.getAllPages()
-				.filter( page => page.progressBarSlide )
-				.forEach( ( page ) => {
-					page.progressBarSlide.classList.toggle( 'active', page.active === true );
+			if( this.activeProgressBarPage !== activePage ) {
+				this.activeProgressBarPage?.progressBarSlide?.classList.remove( 'active' );
+				activePage?.progressBarSlide?.classList.add( 'active' );
+				this.activeProgressBarPage = activePage;
+			}
 
-					page.scrollTriggers.forEach( ( trigger, i ) => {
-						page.scrollTriggerElements[i].classList.toggle( 'active', page.active === true && trigger.active === true );
-					} );
-				} );
+			if( this.activeProgressBarTrigger !== activeScrollTrigger ) {
+				this.activeProgressBarTrigger?.progressBarElement?.classList.remove( 'active' );
+				activeScrollTrigger?.progressBarElement?.classList.add( 'active' );
+				this.activeProgressBarTrigger = activeScrollTrigger;
+			}
 
 			this.showProgressBar();
 
@@ -696,6 +735,24 @@ export default class ScrollView {
 			}, HIDE_SCROLLBAR_TIMEOUT );
 
 		}
+
+	}
+
+	/**
+	 * Scroll to the previous page.
+	 */
+	prev() {
+
+		this.viewportElement.scrollTop -= this.scrollTriggerHeight;
+
+	}
+
+	/**
+	 * Scroll to the next page.
+	 */
+	next() {
+
+		this.viewportElement.scrollTop += this.scrollTriggerHeight;
 
 	}
 
@@ -801,8 +858,8 @@ export default class ScrollView {
 		if( page.active ) {
 
 			page.active = false;
-			page.slideElement.classList.remove( 'present' );
-			page.backgroundElement.classList.remove( 'present' );
+			if( page.slideElement ) page.slideElement.classList.remove( 'present' );
+			if( page.backgroundElement ) page.backgroundElement.classList.remove( 'present' );
 
 		}
 
@@ -874,8 +931,13 @@ export default class ScrollView {
 
 	onScroll() {
 
-		this.syncScrollPosition();
-		this.storeScrollPosition();
+		if( this.pendingScrollRaf ) return;
+
+		this.pendingScrollRaf = requestAnimationFrame( () => {
+			this.pendingScrollRaf = 0;
+			this.syncScrollPosition();
+			this.storeScrollPosition();
+		} );
 
 	}
 

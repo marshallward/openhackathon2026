@@ -75,15 +75,15 @@
 <td><p><img data-src="img/ed.png" height="140" alt="image" /></p>
 <div class="line-block">Ed Yang<br />
 (ACCESS-NRI)</div>
-<p><img data-src="img/utheri.jpg" height="140" alt="image" /></p>
-<div class="line-block">Utheri Wagura<br />
-(NOAA-GFDL)</div></td>
-<td><p><img data-src="img/jorge.png" height="140" alt="image" /></p>
-<div class="line-block">Jorge Galvez Vallejo<br />
-(NCI Australia)</div>
 <p><img data-src="img/marshall.png" height="140" alt="image" /></p>
 <div class="line-block">Marshall Ward<br />
 (NOAA-GFDL)</div></td>
+<td><p><img data-src="img/utheri.jpg" height="140" alt="image" /></p>
+<div class="line-block">Utheri Wagura<br />
+(NOAA-GFDL)</div>
+<p><img data-src="img/jorge.png" height="140" alt="image" /></p>
+<div class="line-block">Jorge Galvez Vallejo<br />
+(NCI Australia / virtual)</div></td>
 </tr>
 </tbody>
 </table>
@@ -116,7 +116,9 @@ href="media/mom6_relvort.mp4">media/mom6_relvort.mp4</a></video>
 <section>
 <section id="gpu-progress" class="title-slide slide level1">
 <h1>GPU Progress</h1>
+<p>The dynamic core has been ported</p>
 <p><img data-src="img/genoa_vs_h100_dycore.svg" alt="image" /></p>
+<p>Performance is tolerable (at best)</p>
 </section>
 <section id="dynamic-core" class="slide level2">
 <h2>Dynamic Core</h2>
@@ -124,7 +126,7 @@ href="media/mom6_relvort.mp4">media/mom6_relvort.mp4</a></video>
 </section>
 <section id="dycore-progress" class="slide level2">
 <h2>Dycore progress</h2>
-<p><img data-src="image/genoa_vs_h100.svg" alt="image" /></p>
+<p><img data-src="img/genoa_vs_h100.svg" alt="image" /></p>
 </section></section>
 <section id="remaining-work" class="title-slide slide level1">
 <h1>Remaining Work</h1>
@@ -133,20 +135,26 @@ href="media/mom6_relvort.mp4">media/mom6_relvort.mp4</a></video>
 
 <section id="proposal-epbl" class="title-slide slide level1">
 <h1>Proposal: ePBL</h1>
-<p>A parameterization of the ocean mixed layer</p>
-<p>TODO: Figure?</p>
-<p>TODO: Code structure</p>
+<p>Modern ocean mixed-layer parameterization</p>
+<ul>
+<li>Columnar loop structure (<code>j-i-k</code>)</li>
+<li>Dense subroutine call tree</li>
+<li>Iterative root-finding</li>
+<li>Tridiagonal solvers</li>
+<li>Thousands of lines</li>
+</ul>
+<p>Representative of our most challenging solvers</p>
 </section>
     </div>
   </div>
 
   <script src="./reveal.js/dist/reveal.js"></script>
-  <script src="./reveal.js/plugin/math/math.js"></script>
-  <script src="./reveal.js/plugin/notes/notes.js"></script>
-  <script src="./reveal.js/plugin/highlight/highlight.js"></script>
+  <script src="./reveal.js/dist/plugin/math.js"></script>
+  <script src="./reveal.js/dist/plugin/notes.js"></script>
+  <script src="./reveal.js/dist/plugin/highlight.js"></script>
+  <script src="./reveal.js/dist/plugin/zoom.js"></script>
 
   <script>
-
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
@@ -213,7 +221,7 @@ href="media/mom6_relvort.mp4">media/mom6_relvort.mp4</a></video>
           { src: './reveal.js/plugin/zoom/zoom.js', async: true },
           { src: './reveal.js/plugin/notes/notes.js', async: true }
         ],
-        plugins : [ RevealMath, RevealNotes, RevealHighlight],
+        plugins : [ RevealMath, RevealNotes, RevealHighlight, RevealZoom],
         pdfMaxPagesPerSlide: 1,
       });
     </script>

@@ -1,5 +1,5 @@
-import { SLIDES_SELECTOR } from '../utils/constants.js'
-import { queryAll, createStyleSheet } from '../utils/util.js'
+import { SLIDES_SELECTOR } from '../utils/constants'
+import { queryAll, createStyleSheet } from '../utils/util'
 
 /**
  * Setups up our presentation for printing/exporting to PDF.
@@ -222,6 +222,8 @@ export default class PrintView {
 
 		// Notify subscribers that the PDF layout is good to go
 		this.Reveal.dispatchEvent({ type: 'pdf-ready' });
+
+		viewportElement.classList.remove( 'loading-scroll-mode' );
 
 	}
 

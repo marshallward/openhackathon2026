@@ -20,23 +20,23 @@ The Team
        | Ed Yang
        | (ACCESS-NRI)
 
-       .. image:: img/utheri.jpg
-          :height: 140
-
-       | Utheri Wagura
-       | (NOAA-GFDL)
-
-     - .. image:: img/jorge.png
-          :height: 140
-
-       | Jorge Galvez Vallejo
-       | (NCI Australia)
-
        .. image:: img/marshall.png
           :height: 140
 
        | Marshall Ward
        | (NOAA-GFDL)
+
+     - .. image:: img/utheri.jpg
+          :height: 140
+
+       | Utheri Wagura
+       | (NOAA-GFDL)
+
+       .. image:: img/jorge.png
+          :height: 140
+
+       | Jorge Galvez Vallejo
+       | (NCI Australia / virtual)
 
 
 MOM6 Ocean Model
@@ -65,7 +65,11 @@ Our strategy:
 GPU Progress
 ============
 
+The dynamic core has been ported
+
 .. image:: img/genoa_vs_h100_dycore.svg
+
+Performance is tolerable (at best)
 
 
 Dynamic Core
@@ -77,7 +81,7 @@ Dynamic Core
 Dycore progress
 ---------------
 
-.. image:: image/genoa_vs_h100.svg
+.. image:: img/genoa_vs_h100.svg
 
 
 Remaining Work
@@ -87,13 +91,20 @@ Remaining Work
 
 .. image:: img/mom6code.svg
 
+
 Proposal: ePBL
 ==============
 
-A parameterization of the ocean mixed layer
+Modern ocean mixed-layer parameterization
 
-TODO: Figure?
+* Columnar loop structure (``j-i-k``)
 
-TODO: Code structure
+* Dense subroutine call tree
 
+* Iterative root-finding
 
+* Tridiagonal solvers
+
+* Thousands of lines
+
+Representative of our most challenging solvers

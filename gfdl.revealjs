@@ -119,12 +119,12 @@ $body$
   </div>
 
   <script src="$revealjs-url$/dist/reveal.js"></script>
-  <script src="$revealjs-url$/plugin/math/math.js"></script>
-  <script src="$revealjs-url$/plugin/notes/notes.js"></script>
-  <script src="$revealjs-url$/plugin/highlight/highlight.js"></script>
+  <script src="$revealjs-url$/dist/plugin/math.js"></script>
+  <script src="$revealjs-url$/dist/plugin/notes.js"></script>
+  <script src="$revealjs-url$/dist/plugin/highlight.js"></script>
+  <script src="$revealjs-url$/dist/plugin/zoom.js"></script>
 
   <script>
-
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
@@ -305,7 +305,7 @@ $if(notes-server)$
 $endif$
           { src: '$revealjs-url$/plugin/notes/notes.js', async: true }
         ],
-        plugins : [ RevealMath, RevealNotes, RevealHighlight],
+        plugins : [ RevealMath, RevealNotes, RevealHighlight, RevealZoom],
         pdfMaxPagesPerSlide: 1,
       });
     </script>

@@ -21,7 +21,7 @@ step_mom -> calculate_diagnostic_fields {
     style.stroke: white
 }
 
-# Dycore
+# Dynamics
 
 step_mom_dynamics: {
     label: Dynamics
@@ -44,10 +44,23 @@ step_mom_dynamics -> mixedlayer_restrat {
     style.stroke: white
 }
 
+
+# Dycore
+
 step_mom_dyn_split_RK2: {
-    label: RK2
+    label: Dycore
     style.fill: lightgreen
 }
+
+# testing
+step_mom_dyn_split_RK2 -> P
+step_mom_dyn_split_RK2 -> cont
+step_mom_dyn_split_RK2 -> btstep
+step_mom_dyn_split_RK2 -> horvisc
+
+
+
+
 
 # Lateral mixing coefficients
 
@@ -57,12 +70,12 @@ calc_slope_functions: {
 }
 
 thickness_diffuse: {
-    label: Isopycnal Diffusion
+    label: Layer Diffusion
     style.fill: lightcoral
 }
 
 set_viscous_BBL: {
-    label: Viscous BBL
+    label: Bottom Drag
     style.fill: lightgreen
 }
 
