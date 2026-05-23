@@ -87,6 +87,10 @@ $if(title)$
          alt="NCI">
   </div-->
   <h1 class="title">$title$</h1>
+  <!-- figure?  Needs a metadata entry? -->
+  <video autoplay muted loop playsinline>
+    <source src="media/mom6_relvort.mp4" type="video/mp4">
+  </video>
 $if(subtitle)$
   <p class="subtitle" style="text-align: left;">$subtitle$</p>
 $endif$

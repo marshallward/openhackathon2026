@@ -1,9 +1,10 @@
-=======================
-Ocean's 4: MOM6 on GPUs
-=======================
+==============
+Team Ocean's 4
+==============
 
+:subtitle: Porting NOAA's MOM6 ocean model to GPUs
 :description: Introductory slides for Princeton Open Hackathon 2026
-:date: 2026-06-02
+.. :date: 2026-06-02
 
 .. Five slides max, this is a 3 minute presentation
 
@@ -39,17 +40,20 @@ The Team
        | (NCI Australia / virtual)
 
 
-MOM6 Ocean Model
-================
+..
+  MOM6 Ocean Model
+  ================
 
-.. figure:: media/mom6_relvort.mp4
-   :target: https://dx.doi.org/10.1029/2019MS001726
+  .. figure:: media/mom6_relvort.mp4
+     :target: https://dx.doi.org/10.1029/2019MS001726
 
-A mission-critical model that doesn't run on GPUs.
+  A mission-critical model that doesn't run on GPUs.
 
 
 Requirements
 ============
+
+MOM6 is an operational model with diverse needs
 
 * Preserve the Fortran codebase
 * Retain CPU performance
@@ -65,23 +69,24 @@ Our strategy:
 GPU Progress
 ============
 
-The dynamic core has been ported
+..
 
-.. image:: img/genoa_vs_h100_dycore.svg
-
-Performance is tolerable (at best)
+  .. image:: img/genoa_vs_h100_dycore.svg
 
 
-Dynamic Core
-------------
+..
+  Dynamic Core
+  ------------
 
-.. image:: img/dycore_tree.svg
+  .. image:: img/dycore_tree.svg
 
 
-Dycore progress
----------------
+.. Dycore progress
+   ---------------
 
 .. image:: img/genoa_vs_h100.svg
+
+The dynamic core has been ported
 
 
 Remaining Work

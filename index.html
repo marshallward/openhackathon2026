@@ -3,8 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <meta name="dcterms.date" content="2026-06-02">
-  <title>Ocean's 4: MOM6 on GPUs</title>
+  <title>Team Ocean's 4</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -53,10 +52,15 @@
          width: 30%"
          alt="NCI">
   </div-->
-  <h1 class="title">Ocean's 4: MOM6 on GPUs</h1>
+  <h1 class="title">Team Ocean's 4</h1>
+  <!-- figure?  Needs a metadata entry? -->
+  <video autoplay loop autoplay muted loop playsinline>
+    <source src="media/mom6_relvort.mp4" type="video/mp4">
+  </video>
+  <p class="subtitle" style="text-align: left;">Porting NOAA's MOM6
+ocean model to GPUs</p>
 <div id="author" class="author" style="text-align: right;">
 </div>
-  <p class="date" style="text-align: right;">2026-06-02</p>
   <!-- Currently cannot add notes to a title slide, so have to do manually-->
   <aside class="notes">
     
@@ -89,17 +93,9 @@
 </table>
 </section>
 
-<section id="mom6-ocean-model" class="title-slide slide level1">
-<h1>MOM6 Ocean Model</h1>
-<figure>
-<video autoplay loop data-src="media/mom6_relvort.mp4" controls=""><a
-href="media/mom6_relvort.mp4">media/mom6_relvort.mp4</a></video>
-</figure>
-<p>A mission-critical model that doesn't run on GPUs.</p>
-</section>
-
 <section id="requirements" class="title-slide slide level1">
 <h1>Requirements</h1>
+<p>MOM6 is an operational model with diverse needs</p>
 <ul>
 <li>Preserve the Fortran codebase</li>
 <li>Retain CPU performance</li>
@@ -113,21 +109,12 @@ href="media/mom6_relvort.mp4">media/mom6_relvort.mp4</a></video>
 </ul>
 </section>
 
-<section>
 <section id="gpu-progress" class="title-slide slide level1">
 <h1>GPU Progress</h1>
-<p>The dynamic core has been ported</p>
-<p><img data-src="img/genoa_vs_h100_dycore.svg" alt="image" /></p>
-<p>Performance is tolerable (at best)</p>
-</section>
-<section id="dynamic-core" class="slide level2">
-<h2>Dynamic Core</h2>
-<p><img data-src="img/dycore_tree.svg" alt="image" /></p>
-</section>
-<section id="dycore-progress" class="slide level2">
-<h2>Dycore progress</h2>
 <p><img data-src="img/genoa_vs_h100.svg" alt="image" /></p>
-</section></section>
+<p>The dynamic core has been ported</p>
+</section>
+
 <section id="remaining-work" class="title-slide slide level1">
 <h1>Remaining Work</h1>
 <p><img data-src="img/mom6code.svg" alt="image" /></p>
