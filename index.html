@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <title>Team Ocean's 4</title>
+  <title>Team: Ocean's Four</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -57,13 +57,12 @@
          width: 30%"
          alt="NCI">
   </div-->
-  <h1 class="title">Team Ocean's 4</h1>
-  <!-- figure?  Needs a metadata entry? -->
-  <video autoplay loop autoplay muted loop playsinline>
-    <source src="media/mom6_relvort.mp4" type="video/mp4">
+  <h1 class="title">Team: Ocean's Four</h1>
+  <video autoplay loop class="title-video" 
+    src="media/mom6_relvort.mp4" autoplay muted loop>
   </video>
-  <p class="subtitle" style="text-align: left;">Porting NOAA's MOM6
-ocean model to GPUs</p>
+  <p class="subtitle" style="text-align: left;">Mission: Port NOAA's
+MOM6 ocean model to GPUs</p>
 <div id="author" class="author" style="text-align: right;">
 </div>
   <!-- Currently cannot add notes to a title slide, so have to do manually-->
@@ -72,8 +71,8 @@ ocean model to GPUs</p>
   </aside>
 </section>
 
-<section id="the-team" class="title-slide slide level1">
-<h1>The Team</h1>
+<section id="team-members" class="title-slide slide level1">
+<h1>Team Members</h1>
 <table>
 <colgroup>
 <col style="width: 50%" />
@@ -100,7 +99,7 @@ ocean model to GPUs</p>
 
 <section id="mom6-requirements" class="title-slide slide level1">
 <h1>MOM6 Requirements</h1>
-<p>Operational forecasting models must remain intact</p>
+<p>Operational forecasting must remain intact</p>
 <ul>
 <li>Preserve the Fortran codebase</li>
 <li>Retain CPU performance</li>
@@ -116,7 +115,8 @@ ocean model to GPUs</p>
 
 <section id="gpu-progress" class="title-slide slide level1">
 <h1>GPU Progress</h1>
-<p><img data-src="img/genoa_vs_h100.svg" alt="image" /></p>
+<p><img data-src="img/genoa_vs_h100.svg" style="width:80.0%"
+alt="image" /></p>
 <p>The dynamic core has been ported</p>
 </section>
 
@@ -163,7 +163,7 @@ ocean model to GPUs</p>
         // Enable the slide overview mode
         overview: true,
         // Vertical centering of slides
-        center: false,
+        center: true,
         // Enables touch navigation on devices with touch input
         touch: true,
         // Turns fragments on and off globally

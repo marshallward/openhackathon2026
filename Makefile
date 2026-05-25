@@ -11,7 +11,8 @@ FLAGS=-s \
 	  --no-highlight \
 	  --mathjax
 
-D2FILES=$(wildcard d2/*.d2)
+#D2FILES=$(wildcard d2/*.d2)
+D2FILES=d2/mom6code.d2
 D2FIGURES=$(patsubst %.d2,%.svg,$(subst d2/,img/,$(D2FILES)))
 
 SOURCE=$(wildcard src/*.F90)

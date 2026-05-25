@@ -1,17 +1,17 @@
-==============
-Team Ocean's 4
-==============
+==================
+Team: Ocean's Four
+==================
 
-:subtitle: Porting NOAA's MOM6 ocean model to GPUs
+:subtitle: Mission: Port NOAA's MOM6 ocean model to GPUs
 :description: Introductory slides for Princeton Open Hackathon 2026
-:center: false
+:center: true
 .. :date: 2026-06-02
 
 .. Five slides max, this is a 3 minute presentation
 
 
-The Team
-========
+Team Members
+============
 
 .. list-table::
    :widths: 50 50
@@ -44,7 +44,7 @@ The Team
 MOM6 Requirements
 =================
 
-Operational forecasting models must remain intact
+Operational forecasting must remain intact
 
 * Preserve the Fortran codebase
 * Retain CPU performance
@@ -75,6 +75,7 @@ GPU Progress
    ---------------
 
 .. image:: img/genoa_vs_h100.svg
+   :width: 80%
 
 The dynamic core has been ported
 

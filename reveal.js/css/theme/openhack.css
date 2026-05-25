@@ -307,6 +307,17 @@ body::after {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
 
+.reveal video.title-video {
+  width: 85%;
+  max-width: 85%;
+  height: auto;
+
+  margin: 0;
+  border: none !important;
+  box-shadow: none !important;
+  background: none !important;
+}
+
 .reveal section img.plain {
   border: 0;
   box-shadow: none;
