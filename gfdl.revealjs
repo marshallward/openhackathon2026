@@ -64,9 +64,12 @@ $endfor$
 $for(include-before)$
 $include-before$
 $endfor$
+  <!--
   <div class="reveal"
        style="background: url(img/bg_gfdl.jpg);
               background-size: cover;">
+  -->
+  <div class="reveal">
 
     <header style="width: 10vh; position: absolute; bottom: 2vh; right: 2vh;">
       <!-- img src="img/noaa_logo.png" -->
