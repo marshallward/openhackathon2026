@@ -4,6 +4,7 @@ Team Ocean's 4
 
 :subtitle: Porting NOAA's MOM6 ocean model to GPUs
 :description: Introductory slides for Princeton Open Hackathon 2026
+:center: false
 .. :date: 2026-06-02
 
 .. Five slides max, this is a 3 minute presentation
@@ -40,20 +41,10 @@ The Team
        | (NCI Australia / virtual)
 
 
-..
-  MOM6 Ocean Model
-  ================
+MOM6 Requirements
+=================
 
-  .. figure:: media/mom6_relvort.mp4
-     :target: https://dx.doi.org/10.1029/2019MS001726
-
-  A mission-critical model that doesn't run on GPUs.
-
-
-Requirements
-============
-
-MOM6 is an operational model with diverse needs
+Operational forecasting models must remain intact
 
 * Preserve the Fortran codebase
 * Retain CPU performance
@@ -70,7 +61,6 @@ GPU Progress
 ============
 
 ..
-
   .. image:: img/genoa_vs_h100_dycore.svg
 
 

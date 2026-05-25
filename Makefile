@@ -1,13 +1,13 @@
 URL=http://lab.hakim.se/reveal-js
 REPO=https://github.com/hakimel/reveal.js/archive/master.zip
-THEME=gfdl
+THEME=openhack
 FLAGS=-s \
 	  -f rst -t revealjs \
 	  --slide-level=2 \
 	  -V revealjs-url=./reveal.js \
 	  -V theme=${THEME} \
 	  -V slideNumber=true \
-	  --template=gfdl.revealjs \
+	  --template=openhack.revealjs \
 	  --no-highlight \
 	  --mathjax
 
@@ -23,11 +23,11 @@ reveal.js:
 	unzip master.zip
 	mv reveal.js-master reveal.js
 
-reveal.js/css/theme/gfdl.css: gfdl.css
+reveal.js/css/theme/openhack.css: openhack.css
 	mkdir -p reveal.js/css/theme
-	cp gfdl.css reveal.js/css/theme/
+	cp openhack.css reveal.js/css/theme/
 
-index.html : slides.txt gfdl.revealjs reveal.js/css/theme/gfdl.css $(D2FIGURES) $(SOURCE)
+index.html : slides.txt openhack.revealjs reveal.js/css/theme/openhack.css $(D2FIGURES) $(SOURCE)
 	pandoc ${FLAGS} $< -o $@
 	sed -i 's/^" data-start-line=/"><code data-start-line=/g' $@
 	#sed -i 's/^"><code>/">/g' $@

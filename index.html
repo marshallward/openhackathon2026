@@ -14,7 +14,7 @@
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <link rel="stylesheet" href="./reveal.js/css/theme/gfdl.css" id="theme">
+  <link rel="stylesheet" href="./reveal.js/css/theme/openhack.css" id="theme">
   <!-- Explicitly add zenburn for highlight support -->
   <link rel="stylesheet" href="./reveal.js/plugin/highlight/zenburn.css" id="theme">
   <!-- Printing and PDF exports -->
@@ -31,17 +31,22 @@
   <base href="./index.html">
 </head>
 <body>
+  <!--
   <div class="reveal"
        style="background: url(img/bg_gfdl.jpg);
               background-size: cover;">
+  -->
+  <div class="reveal">
+    <div class="logos">
+      <img src="img/openacc_logo.svg">
+      <img src="img/openhack_logo.jpg">
+    </div>
 
-    <header style="width: 10vh; position: absolute; bottom: 2vh; right: 2vh;">
-      <!-- img src="img/noaa_logo.png" -->
-    </header>
-
+    <!--
     <footer style="font-size: 1pc; position: absolute; bottom: 2%; left: 2%;">
       <code></code>
     </footer>
+    -->
 
     <div class="slides">
 
@@ -93,9 +98,9 @@ ocean model to GPUs</p>
 </table>
 </section>
 
-<section id="requirements" class="title-slide slide level1">
-<h1>Requirements</h1>
-<p>MOM6 is an operational model with diverse needs</p>
+<section id="mom6-requirements" class="title-slide slide level1">
+<h1>MOM6 Requirements</h1>
+<p>Operational forecasting models must remain intact</p>
 <ul>
 <li>Preserve the Fortran codebase</li>
 <li>Retain CPU performance</li>
@@ -158,7 +163,7 @@ ocean model to GPUs</p>
         // Enable the slide overview mode
         overview: true,
         // Vertical centering of slides
-        center: true,
+        center: false,
         // Enables touch navigation on devices with touch input
         touch: true,
         // Turns fragments on and off globally

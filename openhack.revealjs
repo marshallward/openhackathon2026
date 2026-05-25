@@ -70,14 +70,16 @@ $endfor$
               background-size: cover;">
   -->
   <div class="reveal">
+    <div class="logos">
+      <img src="img/openacc_logo.svg">
+      <img src="img/openhack_logo.jpg">
+    </div>
 
-    <header style="width: 10vh; position: absolute; bottom: 2vh; right: 2vh;">
-      <!-- img src="img/noaa_logo.png" -->
-    </header>
-
+    <!--
     <footer style="font-size: 1pc; position: absolute; bottom: 2%; left: 2%;">
       <code>$url$</code>
     </footer>
+    -->
 
     <div class="slides">
 
