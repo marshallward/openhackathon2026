@@ -2,7 +2,7 @@
 Team: Ocean's Four
 ==================
 
-:subtitle: Mission: Port NOAA's MOM6 ocean model to GPUs
+:subtitle: Port NOAA's MOM6 ocean model to GPUs
 :description: Introductory slides for Princeton Open Hackathon 2026
 :center: true
 
@@ -70,8 +70,8 @@ MOM6 Solver
 ===========
 
 * Modern Fortran codebase
-* Fluid dynamical core
-* Diverse physical parameterizations
+* Fluid dynamics core
+* Diverse physical parameterization solvers
 * MPI parallelization
 * **Bit reproducible** solutions
 
@@ -95,6 +95,7 @@ GPU Progress
 ============
 
 .. image:: img/mom6code.svg
+   :width: 80%
 
 but parameterizations need attention
 
