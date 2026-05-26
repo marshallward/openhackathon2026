@@ -18,68 +18,68 @@ Team Members
    :widths: 25 25 25 25
 
    * - .. image:: img/ed.png
-          :height: 140
+          :height: 120
 
        | Ed Yang
        | ACCESS-NRI
 
      - .. image:: img/utheri.jpg
-          :height: 140
+          :height: 120
 
        | Utheri Wagura
        | NOAA-GFDL
 
      - .. image:: img/marshall.png
-          :height: 140
+          :height: 120
 
        | Marshall Ward
        | NOAA-GFDL
 
      - .. image:: img/jorge.png
-          :height: 140
+          :height: 120
 
        | Jorge Galvez Vallejo
-       | NCI Australia (virtual)
+       | NCI Australia
 
    * - .. image:: img/stephane.jpg 
-          :height: 140
+          :height: 120
 
        | Stéphane Ethier
        | PPPL
 
      - .. image:: img/mat.jpg
-          :height: 140
+          :height: 120
 
        | Mat Colgrove
        | NVIDIA
 
      - .. image:: img/pranay.jpg
-          :height: 140
+          :height: 120
 
        | Pranay Reddy Kommera
        | NVIDIA
 
      - .. image:: img/yifei.jpg
-          :height: 140
+          :height: 120
 
        | Yifei Wu
        | NVIDIA
 
 
-MOM6 Structure
-==============
+MOM6 Solver
+===========
 
-Operational forecasting must remain intact
+* Modern Fortran codebase
+* Fluid dynamical core
+* Diverse physical parameterizations
+* MPI parallelization
+* **Bit reproducible** solutions
 
-* Preserve the Fortran codebase
-* Retain CPU performance
-* Ensure **bit reproducibility**
+GPU strategy:
 
-Strategy:
-
-* Fortran "``do concurrent``" where possible
+* ``do concurrent`` where possible
 * OpenMP kernels where necessary
-* **Manual memory management**
+* Manual memory management
 
 
 GPU Progress
@@ -88,7 +88,7 @@ GPU Progress
 .. image:: img/genoa_vs_h100.svg
    :width: 80%
 
-The dynamic core has been ported...
+The dynamic core runs on GPUs
 
 
 GPU Progress
@@ -96,7 +96,7 @@ GPU Progress
 
 .. image:: img/mom6code.svg
 
-... but operational codes need attention
+but parameterizations need attention
 
 
 Proposal: ePBL
@@ -108,10 +108,10 @@ Modern ocean mixed-layer parameterization
 
 * Dense subroutine call tree
 
-* Iterative root-finding
+* Iterative root finding
 
 * Tridiagonal solvers
 
-* Thousands of lines
+* Thousands of lines of code
 
 Representative of our most challenging solvers

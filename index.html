@@ -82,30 +82,30 @@ MOM6 ocean model to GPUs</p>
 </colgroup>
 <tbody>
 <tr>
-<td><p><img data-src="img/ed.png" height="140" alt="image" /></p>
+<td><p><img data-src="img/ed.png" height="120" alt="image" /></p>
 <div class="line-block">Ed Yang<br />
 ACCESS-NRI</div></td>
-<td><p><img data-src="img/utheri.jpg" height="140" alt="image" /></p>
+<td><p><img data-src="img/utheri.jpg" height="120" alt="image" /></p>
 <div class="line-block">Utheri Wagura<br />
 NOAA-GFDL</div></td>
-<td><p><img data-src="img/marshall.png" height="140" alt="image" /></p>
+<td><p><img data-src="img/marshall.png" height="120" alt="image" /></p>
 <div class="line-block">Marshall Ward<br />
 NOAA-GFDL</div></td>
-<td><p><img data-src="img/jorge.png" height="140" alt="image" /></p>
+<td><p><img data-src="img/jorge.png" height="120" alt="image" /></p>
 <div class="line-block">Jorge Galvez Vallejo<br />
-NCI Australia (virtual)</div></td>
+NCI Australia</div></td>
 </tr>
 <tr>
-<td><p><img data-src="img/stephane.jpg" height="140" alt="image" /></p>
+<td><p><img data-src="img/stephane.jpg" height="120" alt="image" /></p>
 <div class="line-block">Stéphane Ethier<br />
 PPPL</div></td>
-<td><p><img data-src="img/mat.jpg" height="140" alt="image" /></p>
+<td><p><img data-src="img/mat.jpg" height="120" alt="image" /></p>
 <div class="line-block">Mat Colgrove<br />
 NVIDIA</div></td>
-<td><p><img data-src="img/pranay.jpg" height="140" alt="image" /></p>
+<td><p><img data-src="img/pranay.jpg" height="120" alt="image" /></p>
 <div class="line-block">Pranay Reddy Kommera<br />
 NVIDIA</div></td>
-<td><p><img data-src="img/yifei.jpg" height="140" alt="image" /></p>
+<td><p><img data-src="img/yifei.jpg" height="120" alt="image" /></p>
 <div class="line-block">Yifei Wu<br />
 NVIDIA</div></td>
 </tr>
@@ -113,19 +113,20 @@ NVIDIA</div></td>
 </table>
 </section>
 
-<section id="mom6-structure" class="title-slide slide level1">
-<h1>MOM6 Structure</h1>
-<p>Operational forecasting must remain intact</p>
+<section id="mom6-solver" class="title-slide slide level1">
+<h1>MOM6 Solver</h1>
 <ul>
-<li>Preserve the Fortran codebase</li>
-<li>Retain CPU performance</li>
-<li>Ensure <strong>bit reproducibility</strong></li>
+<li>Modern Fortran codebase</li>
+<li>Fluid dynamical core</li>
+<li>Diverse physical parameterizations</li>
+<li>MPI parallelization</li>
+<li><strong>Bit reproducible</strong> solutions</li>
 </ul>
-<p>Strategy:</p>
+<p>GPU strategy:</p>
 <ul>
-<li>Fortran "<code>do concurrent</code>" where possible</li>
+<li><code>do concurrent</code> where possible</li>
 <li>OpenMP kernels where necessary</li>
-<li><strong>Manual memory management</strong></li>
+<li>Manual memory management</li>
 </ul>
 </section>
 
@@ -133,13 +134,13 @@ NVIDIA</div></td>
 <h1>GPU Progress</h1>
 <p><img data-src="img/genoa_vs_h100.svg" style="width:80.0%"
 alt="image" /></p>
-<p>The dynamic core has been ported...</p>
+<p>The dynamic core runs on GPUs</p>
 </section>
 
 <section id="gpu-progress-1" class="title-slide slide level1">
 <h1>GPU Progress</h1>
 <p><img data-src="img/mom6code.svg" alt="image" /></p>
-<p>... but operational codes need attention</p>
+<p>but parameterizations need attention</p>
 </section>
 
 <section id="proposal-epbl" class="title-slide slide level1">
@@ -148,9 +149,9 @@ alt="image" /></p>
 <ul>
 <li>Columnar loop structure (<code>j-i-k</code>)</li>
 <li>Dense subroutine call tree</li>
-<li>Iterative root-finding</li>
+<li>Iterative root finding</li>
 <li>Tridiagonal solvers</li>
-<li>Thousands of lines</li>
+<li>Thousands of lines of code</li>
 </ul>
 <p>Representative of our most challenging solvers</p>
 </section>
