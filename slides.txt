@@ -14,31 +14,55 @@ Team Members
 ============
 
 .. list-table::
-   :widths: 50 50
+   :widths: 25 25 25 25
 
    * - .. image:: img/ed.png
           :height: 140
 
        | Ed Yang
-       | (ACCESS-NRI)
-
-       .. image:: img/marshall.png
-          :height: 140
-
-       | Marshall Ward
-       | (NOAA-GFDL)
+       | ACCESS-NRI
 
      - .. image:: img/utheri.jpg
           :height: 140
 
        | Utheri Wagura
-       | (NOAA-GFDL)
+       | NOAA-GFDL
 
-       .. image:: img/jorge.png
+     - .. image:: img/marshall.png
+          :height: 140
+
+       | Marshall Ward
+       | NOAA-GFDL
+
+     - .. image:: img/jorge.png
           :height: 140
 
        | Jorge Galvez Vallejo
-       | (NCI Australia / virtual)
+       | NCI Australia (virtual)
+
+   * - .. image:: img/stephane.jpg 
+          :height: 140
+
+       | Stéphane Ethier
+       | PPPL
+
+     - .. image:: img/mat.jpg
+          :height: 140
+
+       | Mat Colgrove
+       | NVIDIA
+
+     - .. image:: img/pranay.jpg
+          :height: 140
+
+       | Pranay Reddy Kommera
+       | NVIDIA
+
+     - .. image:: img/yifei.jpg
+          :height: 140
+
+       | Yifei Wu
+       | NVIDIA
 
 
 MOM6 Requirements

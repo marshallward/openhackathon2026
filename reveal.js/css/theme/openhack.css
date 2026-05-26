@@ -428,3 +428,19 @@ body::after {
   box-shadow: none !important;
   background: none !important;
 }
+
+/* region specific */
+
+#team-members {
+  font-size: 0.55em;
+}
+
+#team-members p {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+  line-height: 1.0;
+}
+
+#team-members td {
+  vertical-align: top;
+}
