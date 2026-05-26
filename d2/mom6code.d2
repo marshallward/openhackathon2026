@@ -6,19 +6,19 @@ step_mom: {
 }
 
 step_mom -> step_mom_dynamics {
-    #style.stroke: white
+    style.stroke: black
 }
 step_mom -> step_mom_thermo {
-    #style.stroke: white
+    style.stroke: black
 }
 step_mom -> ale_regridding_and_remapping {
-    #style.stroke: white
+    style.stroke: black
 }
 step_mom -> step_mom_tracer_dyn {
-    #style.stroke: white
+    style.stroke: black
 }
 step_mom -> calculate_diagnostic_fields {
-    #style.stroke: white
+    style.stroke: black
 }
 
 # Dynamics
@@ -29,19 +29,19 @@ step_mom_dynamics: {
 }
 
 step_mom_dynamics -> dycore.step_mom_dyn_split_RK2 {
-    #style.stroke: white
+    style.stroke: black
 }
 step_mom_dynamics -> calc_slope_functions {
-    #style.stroke: white
+    style.stroke: black
 }
 step_mom_dynamics -> thickness_diffuse {
-    #style.stroke: white
+    style.stroke: black
 }
 step_mom_dynamics -> set_viscous_BBL {
-    #style.stroke: white
+    style.stroke: black
 }
 step_mom_dynamics -> mixedlayer_restrat {
-    #style.stroke: white
+    style.stroke: black
 }
 
 
@@ -50,7 +50,7 @@ step_mom_dynamics -> mixedlayer_restrat {
 dycore: {
   label: ""
   style.fill: transparent
-  style.stroke: lightgreen
+  style.stroke: green
   style.stroke-width: 3
   style.border-radius: 999
 
@@ -85,7 +85,7 @@ mixedlayer_restrat: {
 
 
 calc_slope_functions -> calc_isoneutral_slopes {
-    #style.stroke: white
+    style.stroke: black
 }
 #calc_slope_functions -> valc_visbeck_coeffs_old
 
@@ -103,13 +103,13 @@ step_mom_thermo: {
 }
 
 step_mom_thermo -> diabatic {
-    #style.stroke: white
+    style.stroke: black
 }
 diabatic -> epbl.energetic_pbl {
-    #style.stroke: white
+    style.stroke: black
 }
 diabatic -> set_diffusivity {
-    #style.stroke: white
+    style.stroke: black
 }
 #diabatic -> applyboundaryfluxesinout
 
@@ -137,10 +137,10 @@ set_diffusivity: {
 }
 
 set_diffusivity -> kappa_shear_vertex {
-    #style.stroke: white
+    style.stroke: black
 }
 set_diffusivity -> full_convection {
-    #style.stroke: white
+    style.stroke: black
 }
 
 kappa_shear_vertex: {
@@ -169,10 +169,10 @@ step_mom_tracer_dyn: {
 }
 
 step_mom_tracer_dyn -> tracer_advect {
-    #style.stroke: white
+    style.stroke: black
 }
 step_mom_tracer_dyn -> tracer_hordiff {
-    #style.stroke: white
+    style.stroke: black
 }
 #step_mom_tracer_dyn -> tracer_vertdiff
 

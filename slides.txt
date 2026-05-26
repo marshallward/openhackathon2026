@@ -5,6 +5,7 @@ Team: Ocean's Four
 :subtitle: Mission: Port NOAA's MOM6 ocean model to GPUs
 :description: Introductory slides for Princeton Open Hackathon 2026
 :center: true
+
 .. :date: 2026-06-02
 
 .. Five slides max, this is a 3 minute presentation
@@ -65,8 +66,8 @@ Team Members
        | NVIDIA
 
 
-MOM6 Requirements
-=================
+MOM6 Structure
+==============
 
 Operational forecasting must remain intact
 
@@ -74,42 +75,28 @@ Operational forecasting must remain intact
 * Retain CPU performance
 * Ensure **bit reproducibility**
 
-Our strategy:
+Strategy:
 
-* Fortran intrinsics where possible (``do concurrent``)
-* OpenMP directives where necessary
-* **Manual** memory management
+* Fortran "``do concurrent``" where possible
+* OpenMP kernels where necessary
+* **Manual memory management**
 
 
 GPU Progress
 ============
 
-..
-  .. image:: img/genoa_vs_h100_dycore.svg
-
-
-..
-  Dynamic Core
-  ------------
-
-  .. image:: img/dycore_tree.svg
-
-
-.. Dycore progress
-   ---------------
-
 .. image:: img/genoa_vs_h100.svg
    :width: 80%
 
-The dynamic core has been ported
+The dynamic core has been ported...
 
 
-Remaining Work
-==============
-
-.. Flow chart of general model structure and remaining components
+GPU Progress
+============
 
 .. image:: img/mom6code.svg
+
+... but operational codes need attention
 
 
 Proposal: ePBL

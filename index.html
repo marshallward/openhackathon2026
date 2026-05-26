@@ -113,19 +113,19 @@ NVIDIA</div></td>
 </table>
 </section>
 
-<section id="mom6-requirements" class="title-slide slide level1">
-<h1>MOM6 Requirements</h1>
+<section id="mom6-structure" class="title-slide slide level1">
+<h1>MOM6 Structure</h1>
 <p>Operational forecasting must remain intact</p>
 <ul>
 <li>Preserve the Fortran codebase</li>
 <li>Retain CPU performance</li>
 <li>Ensure <strong>bit reproducibility</strong></li>
 </ul>
-<p>Our strategy:</p>
+<p>Strategy:</p>
 <ul>
-<li>Fortran intrinsics where possible (<code>do concurrent</code>)</li>
-<li>OpenMP directives where necessary</li>
-<li><strong>Manual</strong> memory management</li>
+<li>Fortran "<code>do concurrent</code>" where possible</li>
+<li>OpenMP kernels where necessary</li>
+<li><strong>Manual memory management</strong></li>
 </ul>
 </section>
 
@@ -133,12 +133,13 @@ NVIDIA</div></td>
 <h1>GPU Progress</h1>
 <p><img data-src="img/genoa_vs_h100.svg" style="width:80.0%"
 alt="image" /></p>
-<p>The dynamic core has been ported</p>
+<p>The dynamic core has been ported...</p>
 </section>
 
-<section id="remaining-work" class="title-slide slide level1">
-<h1>Remaining Work</h1>
+<section id="gpu-progress-1" class="title-slide slide level1">
+<h1>GPU Progress</h1>
 <p><img data-src="img/mom6code.svg" alt="image" /></p>
+<p>... but operational codes need attention</p>
 </section>
 
 <section id="proposal-epbl" class="title-slide slide level1">
