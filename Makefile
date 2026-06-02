@@ -7,7 +7,6 @@ FLAGS=-s \
 	  -V revealjs-url=./reveal.js \
 	  -V theme=${THEME} \
 	  -V slideNumber=true \
-	  --template=openhack.revealjs \
 	  --no-highlight \
 	  --mathjax
 
@@ -28,8 +27,15 @@ reveal.js/css/theme/openhack.css: openhack.css
 	mkdir -p reveal.js/css/theme
 	cp openhack.css reveal.js/css/theme/
 
-index.html : slides.txt openhack.revealjs reveal.js/css/theme/openhack.css $(D2FIGURES) $(SOURCE)
-	pandoc ${FLAGS} $< -o $@
+index.html: slides.txt openhack.revealjs reveal.js/css/theme/openhack.css $(D2FIGURES) $(SOURCE)
+	pandoc ${FLAGS} --template=openhack.revealjs $< -o $@
+	sed -i 's/^" data-start-line=/"><code data-start-line=/g' $@
+	#sed -i 's/^"><code>/">/g' $@
+	sed -i 's/<li class="fragment"/<li/g' $@
+	sed -i 's/<video /<video autoplay loop /g' $@
+
+day2.html: day2.txt openhack.notes.revealjs reveal.js/css/theme/openhack.css $(D2FIGURES) $(SOURCE)
+	pandoc ${FLAGS} --template=openhack.notes.revealjs $< -o $@
 	sed -i 's/^" data-start-line=/"><code data-start-line=/g' $@
 	#sed -i 's/^"><code>/">/g' $@
 	sed -i 's/<li class="fragment"/<li/g' $@
@@ -39,5 +45,5 @@ img/%.svg: d2/%.d2
 	d2 $^ $@ --pad 2
 
 clean:
-	rm -f index.html
+	rm -f index.html day2.html
 	rm -f $(D2FIGURES)

@@ -1,0 +1,41 @@
+=========
+Ocean's 4
+=========
+
+Profiler Output
+===============
+
+image? link?
+
+
+Progress and Goals
+==================
+
+Progress
+
+* ``energetic_PBL`` kernel generated
+
+  * *without* ``get_Langmuir_number``
+
+* Lateral mixing (Utheri)
+
+* Pressure force with Thermodynamics (Ed) 
+
+* ``write_energy`` diagnostic port (Jorge)
+
+
+Goals
+
+* ???
+
+
+Problems and Solutions
+======================
+
+* "auto" arrays passed deeply into subroutines can fail to resolve
+
+* ``omp loop`` is not compatible with other compilers (GCC)
+
+* Slow build times
+
+  * Submodules greatly speed up
