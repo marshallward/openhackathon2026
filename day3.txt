@@ -1,0 +1,57 @@
+=========
+Ocean's 4
+=========
+
+:subtitle: Day 3 Report
+
+
+Energetic PBL
+=============
+
+.. image:: img/day3_cache_orig.png
+   :width: 80%
+
+9 sec/step
+
+
+EPBL: 3d array
+==============
+
+.. image:: img/day3_cache_3d.png
+   :width: 80%
+
+4.5 sec/step (2x)
+
+
+EPBL: No auto arrays
+====================
+
+.. image:: img/day3_cache_noauto.png
+   :width: 80%
+
+22 msec/step (200x)
+
+
+EPBL: Function calls
+====================
+
+.. image:: img/day3_registers.png
+
+.. image:: img/day3_reg_fn_call.png
+   :width: 50%
+
+
+Porting Progress
+================
+
+* ``thickness_diffuse``
+
+  * bit reproducible
+
+* ``lateral_mixing_coeff``
+
+  * benchmark_ALE complete
+
+  * Compiler bug: derived type handling
+
+* ``mixedlayer_restrat``

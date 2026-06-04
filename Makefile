@@ -11,12 +11,12 @@ FLAGS=-s \
 	  --mathjax
 
 #D2FILES=$(wildcard d2/*.d2)
-D2FILES=d2/mom6code.d2
+D2FILES=d2/mom6code.d2 d2/mom6code_v2.d2
 D2FIGURES=$(patsubst %.d2,%.svg,$(subst d2/,img/,$(D2FILES)))
 
 SOURCE=$(wildcard src/*.F90)
 
-all: index.html reveal.js $(D2FIGURES)
+all: index.html day2.html day3.html day4.html reveal.js $(D2FIGURES)
 
 reveal.js:
 	wget -N ${REPO}
@@ -34,7 +34,7 @@ index.html: slides.txt openhack.revealjs reveal.js/css/theme/openhack.css $(D2FI
 	sed -i 's/<li class="fragment"/<li/g' $@
 	sed -i 's/<video /<video autoplay loop /g' $@
 
-day2.html: day2.txt openhack.notes.revealjs reveal.js/css/theme/openhack.css $(D2FIGURES) $(SOURCE)
+day4.html: day4.txt openhack.notes.revealjs reveal.js/css/theme/openhack.css $(D2FIGURES) $(SOURCE)
 	pandoc ${FLAGS} --template=openhack.notes.revealjs $< -o $@
 	sed -i 's/^" data-start-line=/"><code data-start-line=/g' $@
 	#sed -i 's/^"><code>/">/g' $@

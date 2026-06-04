@@ -1,0 +1,173 @@
+=========
+Ocean's 4
+=========
+
+:subtitle: Princeton Open Hackathon 2026
+
+
+Team Members
+============
+
+.. list-table::
+   :widths: 25 25 25 25
+
+   * - .. image:: img/ed.png
+          :height: 120
+
+       | Ed Yang
+       | ACCESS-NRI
+
+     - .. image:: img/utheri.jpg
+          :height: 120
+
+       | Utheri Wagura
+       | NOAA-GFDL
+
+     - .. image:: img/marshall.png
+          :height: 120
+
+       | Marshall Ward
+       | NOAA-GFDL
+
+     - .. image:: img/jorge.png
+          :height: 120
+
+       | Jorge Galvez Vallejo
+       | NCI Australia
+
+   * - .. image:: img/stephane.jpg 
+          :height: 120
+
+       | Stéphane Ethier
+       | PPPL
+
+     - .. image:: img/mat.jpg
+          :height: 120
+
+       | Mat Colgrove
+       | NVIDIA
+
+     - .. image:: img/pranay.jpg
+          :height: 120
+
+       | Pranay Reddy Kommera
+       | NVIDIA
+
+     - .. image:: img/yifei.jpg
+          :height: 120
+
+       | Yifei Wu
+       | NVIDIA
+
+
+MOM6 Ocean Model
+================
+
+.. figure::  media/mom6_relvort.mp4
+   :width: 80%
+
+
+Algorithmic Motif
+-----------------
+
+Problem the team is trying to solve.
+
+Scientific driver for the chosen algorithm.
+
+What’s the algorithmic motif?
+
+What parts are you focusing on?
+
+
+Evolution and Strategy
+======================
+
+What was your goal coming here?
+   Port the most difficult MOM6 subroutines
+
+What was your initial strategy?
+   Get anything working, then iterate on perfomrance 
+
+How did this strategy change?
+   Overall worked as expected   
+
+
+Background
+==========
+
+========================================     ==================================
+Programming Language                         Fortran
+GPU Programming Model/Framework/Libraries    OpenMP, OpenACC (do concurrent)
+GPU types used, cluster config               A100, GH200
+How many GPUs?                               1
+========================================     ==================================
+
+
+Energetic PBL
+=============
+
+=======================    ============
+Initial port               9 sec
+Eliminate 3d->1d copies    4.5 sec
+Replace auto arrays        ~200 msec
+Aggressive Inlining        (?)
+``do concurrent``          2.4 msec
+=======================    ============
+
+~3800x improvement
+
+
+Relative performance
+====================
+
+.. code::
+
+ Time (%)  Total Time (ns)   Name                               
+ --------  ---------------   ---------------------------------------
+     22.9         86937216   mom_continuity_ppm_set_merid_bt_cont
+     22.3         84517504   mom_continuity_ppm_set_zonal_bt_cont
+      7.4         27961536   mom_continuity_ppm_meridional_mass_flux
+      7.4         27959136   mom_continuity_ppm_zonal_mass_flux
+      7.3         27778688   mom_energetic_pbl_energetic_pbl
+      3.7         14164896   mom_continuity_ppm_zonal_mass_flux
+      3.5         13286400   mom_continuity_ppm_meridional_mass_flux
+
+
+Kappa Shear
+===========
+
+.. image:: img/Kappa_shear_cache.png
+
+
+Kappa Shear Fixed
+=================
+
+.. image:: img/Kappa_shear_cache_fixed_call_size.png
+
+
+Porting Coverage
+================
+
+.. image:: img/mom6code.svg
+
+
+Porting Coverage
+================
+
+.. image:: img/mom6code_v2.svg
+
+
+Was it worth it?
+================
+
+* We ported our most difficult kernels
+   * energetic PBL
+   * kappa shear
+
+* Dramatic increase in coverage
+
+* Invaluable insights on compiler internals
+
+* Shared several compiler bug reports
+
+Overall an invaluable experience

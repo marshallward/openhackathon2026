@@ -58,8 +58,7 @@
          alt="NCI">
   </div-->
   <h1 class="title">Ocean's 4</h1>
-  <p class="subtitle" style="text-align: left;"><p>Day 1-2
-Report</p></p>
+  <p class="subtitle" style="text-align: left;"><p>Day 3 Report</p></p>
 <div id="author" class="author" style="text-align: right;">
 </div>
   <!-- Currently cannot add notes to a title slide, so have to do manually-->
@@ -68,85 +67,48 @@ Report</p></p>
   </aside>
 </section>
 
-<section id="team-members" class="title-slide slide level1">
-<h1>Team Members</h1>
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-</colgroup>
-<tbody>
-<tr>
-<td><p><img data-src="img/ed.png" height="120" alt="image" /></p>
-<div class="line-block">Ed Yang<br />
-ACCESS-NRI</div></td>
-<td><p><img data-src="img/utheri.jpg" height="120" alt="image" /></p>
-<div class="line-block">Utheri Wagura<br />
-NOAA-GFDL</div></td>
-<td><p><img data-src="img/marshall.png" height="120" alt="image" /></p>
-<div class="line-block">Marshall Ward<br />
-NOAA-GFDL</div></td>
-<td><p><img data-src="img/jorge.png" height="120" alt="image" /></p>
-<div class="line-block">Jorge Galvez Vallejo<br />
-NCI Australia</div></td>
-</tr>
-<tr>
-<td><p><img data-src="img/stephane.jpg" height="120" alt="image" /></p>
-<div class="line-block">Stéphane Ethier<br />
-PPPL</div></td>
-<td><p><img data-src="img/mat.jpg" height="120" alt="image" /></p>
-<div class="line-block">Mat Colgrove<br />
-NVIDIA</div></td>
-<td><p><img data-src="img/pranay.jpg" height="120" alt="image" /></p>
-<div class="line-block">Pranay Reddy Kommera<br />
-NVIDIA</div></td>
-<td><p><img data-src="img/yifei.jpg" height="120" alt="image" /></p>
-<div class="line-block">Yifei Wu<br />
-NVIDIA</div></td>
-</tr>
-</tbody>
-</table>
-</section>
-
-<section id="progress-and-goals" class="title-slide slide level1">
-<h1>Progress and Goals</h1>
-<ul>
-<li><code>energetic_PBL</code> kernel generated and profiled
-(Marshall)</li>
-<li>Isoneutral slope calc, reduced data transfers (Utheri)</li>
-<li>Pressure force + density integrals (Ed)</li>
-<li><code>write_energy</code> diagnostic port (Jorge)</li>
-<li>AI-driven port of <code>vertvisc()</code> (Acceleragent)</li>
-</ul>
-</section>
-
 <section id="energetic-pbl" class="title-slide slide level1">
 <h1>Energetic PBL</h1>
-<p><img data-src="img/memwork.png" style="width:80.0%"
+<p><img data-src="img/day3_cache_orig.png" style="width:80.0%"
 alt="image" /></p>
-<p><img data-src="img/stalls.png" style="width:80.0%" alt="image" /></p>
-<p>~1 TB of L1-L2 cache transfers</p>
+<p>9 sec/step</p>
 </section>
 
-<section id="problems-and-solutions" class="title-slide slide level1">
-<h1>Problems and Solutions</h1>
+<section id="epbl-3d-array" class="title-slide slide level1">
+<h1>EPBL: 3d array</h1>
+<p><img data-src="img/day3_cache_3d.png" style="width:80.0%"
+alt="image" /></p>
+<p>4.5 sec/step (2x)</p>
+</section>
+
+<section id="epbl-no-auto-arrays" class="title-slide slide level1">
+<h1>EPBL: No auto arrays</h1>
+<p><img data-src="img/day3_cache_noauto.png" style="width:80.0%"
+alt="image" /></p>
+<p>22 msec/step (200x)</p>
+</section>
+
+<section id="epbl-function-calls" class="title-slide slide level1">
+<h1>EPBL: Function calls</h1>
+<p><img data-src="img/day3_registers.png" alt="image" /></p>
+<p><img data-src="img/day3_reg_fn_call.png" style="width:50.0%"
+alt="image" /></p>
+</section>
+
+<section id="porting-progress" class="title-slide slide level1">
+<h1>Porting Progress</h1>
 <ul>
-<li><code>get_Langmuir_number</code> subroutine errors</li>
-<li>Overuse of auto arrays</li>
-<li>Internal 3D -&gt; 2D - 1D copies</li>
+<li><code>thickness_diffuse</code>
+<ul>
+<li>bit reproducible</li>
+</ul></li>
+<li><code>lateral_mixing_coeff</code>
+<ul>
+<li>benchmark_ALE complete</li>
+<li>Compiler bug: derived type handling</li>
+</ul></li>
+<li><code>mixedlayer_restrat</code></li>
 </ul>
-<p><strong>Proposal</strong> Use 3D arrays directly in solvers</p>
-</section>
-
-<section id="pressure-force" class="title-slide slide level1">
-<h1>Pressure Force</h1>
-<p><img data-src="img/pf_before.png" style="width:65.0%"
-alt="image" /></p>
-<p><img data-src="img/pf_after.png" style="width:65.0%"
-alt="image" /></p>
-<p>70x speedup</p>
 </section>
     </div>
   </div>

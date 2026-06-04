@@ -2,40 +2,107 @@
 Ocean's 4
 =========
 
-Profiler Output
-===============
+:subtitle: Day 1-2 Report
 
-image? link?
+Team Members
+============
+
+.. list-table::
+   :widths: 25 25 25 25
+
+   * - .. image:: img/ed.png
+          :height: 120
+
+       | Ed Yang
+       | ACCESS-NRI
+
+     - .. image:: img/utheri.jpg
+          :height: 120
+
+       | Utheri Wagura
+       | NOAA-GFDL
+
+     - .. image:: img/marshall.png
+          :height: 120
+
+       | Marshall Ward
+       | NOAA-GFDL
+
+     - .. image:: img/jorge.png
+          :height: 120
+
+       | Jorge Galvez Vallejo
+       | NCI Australia
+
+   * - .. image:: img/stephane.jpg 
+          :height: 120
+
+       | Stéphane Ethier
+       | PPPL
+
+     - .. image:: img/mat.jpg
+          :height: 120
+
+       | Mat Colgrove
+       | NVIDIA
+
+     - .. image:: img/pranay.jpg
+          :height: 120
+
+       | Pranay Reddy Kommera
+       | NVIDIA
+
+     - .. image:: img/yifei.jpg
+          :height: 120
+
+       | Yifei Wu
+       | NVIDIA
 
 
 Progress and Goals
 ==================
 
-Progress
+* ``energetic_PBL`` kernel generated and profiled (Marshall)
 
-* ``energetic_PBL`` kernel generated
+* Isoneutral slope calc, reduced data transfers (Utheri)
 
-  * *without* ``get_Langmuir_number``
-
-* Lateral mixing (Utheri)
-
-* Pressure force with Thermodynamics (Ed) 
+* Pressure force + density integrals (Ed)
 
 * ``write_energy`` diagnostic port (Jorge)
 
+* AI-driven port of ``vertvisc()`` (Acceleragent)
 
-Goals
 
-* ???
+Energetic PBL
+=============
 
+.. image:: img/memwork.png
+   :width: 80%
+
+.. image:: img/stalls.png
+   :width: 80%
+
+~1 TB of L1-L2 cache transfers
 
 Problems and Solutions
 ======================
 
-* "auto" arrays passed deeply into subroutines can fail to resolve
+* ``get_Langmuir_number`` subroutine errors
 
-* ``omp loop`` is not compatible with other compilers (GCC)
+* Overuse of auto arrays
 
-* Slow build times
+* Internal 3D -> 2D - 1D copies
 
-  * Submodules greatly speed up
+**Proposal** Use 3D arrays directly in solvers
+
+
+Pressure Force
+==============
+
+.. image:: img/pf_before.png
+   :width: 65%
+
+.. image:: img/pf_after.png
+   :width: 65%
+
+70x speedup

@@ -58,8 +58,8 @@
          alt="NCI">
   </div-->
   <h1 class="title">Ocean's 4</h1>
-  <p class="subtitle" style="text-align: left;"><p>Day 1-2
-Report</p></p>
+  <p class="subtitle" style="text-align: left;"><p>Princeton Open
+Hackathon 2026</p></p>
 <div id="author" class="author" style="text-align: right;">
 </div>
   <!-- Currently cannot add notes to a title slide, so have to do manually-->
@@ -110,43 +110,144 @@ NVIDIA</div></td>
 </table>
 </section>
 
-<section id="progress-and-goals" class="title-slide slide level1">
-<h1>Progress and Goals</h1>
-<ul>
-<li><code>energetic_PBL</code> kernel generated and profiled
-(Marshall)</li>
-<li>Isoneutral slope calc, reduced data transfers (Utheri)</li>
-<li>Pressure force + density integrals (Ed)</li>
-<li><code>write_energy</code> diagnostic port (Jorge)</li>
-<li>AI-driven port of <code>vertvisc()</code> (Acceleragent)</li>
-</ul>
+<section>
+<section id="mom6-ocean-model" class="title-slide slide level1">
+<h1>MOM6 Ocean Model</h1>
+<figure>
+<video autoplay loop data-src="media/mom6_relvort.mp4" style="width:80.0%"
+controls=""><a
+href="media/mom6_relvort.mp4">media/mom6_relvort.mp4</a></video>
+</figure>
+</section>
+<section id="algorithmic-motif" class="slide level2">
+<h2>Algorithmic Motif</h2>
+<p>Problem the team is trying to solve.</p>
+<p>Scientific driver for the chosen algorithm.</p>
+<p>What’s the algorithmic motif?</p>
+<p>What parts are you focusing on?</p>
+</section></section>
+<section id="evolution-and-strategy" class="title-slide slide level1">
+<h1>Evolution and Strategy</h1>
+<dl>
+<dt>What was your goal coming here?</dt>
+<dd>
+<p>Port the most difficult MOM6 subroutines</p>
+</dd>
+<dt>What was your initial strategy?</dt>
+<dd>
+<p>Get anything working, then iterate on perfomrance</p>
+</dd>
+<dt>How did this strategy change?</dt>
+<dd>
+<p>Overall worked as expected</p>
+</dd>
+</dl>
+</section>
+
+<section id="background" class="title-slide slide level1">
+<h1>Background</h1>
+<table>
+<tbody>
+<tr>
+<td>Programming Language</td>
+<td>Fortran</td>
+</tr>
+<tr>
+<td>GPU Programming Model/Framework/Libraries</td>
+<td>OpenMP, OpenACC (do concurrent)</td>
+</tr>
+<tr>
+<td>GPU types used, cluster config</td>
+<td>A100, GH200</td>
+</tr>
+<tr>
+<td>How many GPUs?</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
 </section>
 
 <section id="energetic-pbl" class="title-slide slide level1">
 <h1>Energetic PBL</h1>
-<p><img data-src="img/memwork.png" style="width:80.0%"
-alt="image" /></p>
-<p><img data-src="img/stalls.png" style="width:80.0%" alt="image" /></p>
-<p>~1 TB of L1-L2 cache transfers</p>
+<table>
+<tbody>
+<tr>
+<td>Initial port</td>
+<td>9 sec</td>
+</tr>
+<tr>
+<td>Eliminate 3d-&gt;1d copies</td>
+<td>4.5 sec</td>
+</tr>
+<tr>
+<td>Replace auto arrays</td>
+<td>~200 msec</td>
+</tr>
+<tr>
+<td>Aggressive Inlining</td>
+<td>(?)</td>
+</tr>
+<tr>
+<td><code>do concurrent</code></td>
+<td>2.4 msec</td>
+</tr>
+</tbody>
+</table>
+<p>~3800x improvement</p>
 </section>
 
-<section id="problems-and-solutions" class="title-slide slide level1">
-<h1>Problems and Solutions</h1>
+<section id="relative-performance" class="title-slide slide level1">
+<h1>Relative performance</h1>
+<pre><code>Time (%)  Total Time (ns)   Name                               
+--------  ---------------   ---------------------------------------
+    22.9         86937216   mom_continuity_ppm_set_merid_bt_cont
+    22.3         84517504   mom_continuity_ppm_set_zonal_bt_cont
+     7.4         27961536   mom_continuity_ppm_meridional_mass_flux
+     7.4         27959136   mom_continuity_ppm_zonal_mass_flux
+     7.3         27778688   mom_energetic_pbl_energetic_pbl
+     3.7         14164896   mom_continuity_ppm_zonal_mass_flux
+     3.5         13286400   mom_continuity_ppm_meridional_mass_flux</code></pre>
+</section>
+
+<section id="kappa-shear" class="title-slide slide level1">
+<h1>Kappa Shear</h1>
+<p><img data-src="img/Kappa_shear_cache.png" alt="image" /></p>
+</section>
+
+<section id="kappa-shear-fixed" class="title-slide slide level1">
+<h1>Kappa Shear Fixed</h1>
+<p><img data-src="img/Kappa_shear_cache_fixed_call_size.png"
+alt="image" /></p>
+</section>
+
+<section id="porting-coverage" class="title-slide slide level1">
+<h1>Porting Coverage</h1>
+<p><img data-src="img/mom6code.svg" alt="image" /></p>
+</section>
+
+<section id="porting-coverage-1" class="title-slide slide level1">
+<h1>Porting Coverage</h1>
+<p><img data-src="img/mom6code_v2.svg" alt="image" /></p>
+</section>
+
+<section id="was-it-worth-it" class="title-slide slide level1">
+<h1>Was it worth it?</h1>
 <ul>
-<li><code>get_Langmuir_number</code> subroutine errors</li>
-<li>Overuse of auto arrays</li>
-<li>Internal 3D -&gt; 2D - 1D copies</li>
+<li><dl>
+<dt>We ported our most difficult kernels</dt>
+<dd>
+<ul>
+<li>energetic PBL</li>
+<li>kappa shear</li>
 </ul>
-<p><strong>Proposal</strong> Use 3D arrays directly in solvers</p>
-</section>
-
-<section id="pressure-force" class="title-slide slide level1">
-<h1>Pressure Force</h1>
-<p><img data-src="img/pf_before.png" style="width:65.0%"
-alt="image" /></p>
-<p><img data-src="img/pf_after.png" style="width:65.0%"
-alt="image" /></p>
-<p>70x speedup</p>
+</dd>
+</dl></li>
+<li>Dramatic increase in coverage</li>
+<li>Invaluable insights on compiler internals</li>
+<li>Shared several compiler bug reports</li>
+</ul>
+<p>Overall an invaluable experience</p>
 </section>
     </div>
   </div>
